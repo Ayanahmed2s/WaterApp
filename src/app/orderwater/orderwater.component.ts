@@ -54,7 +54,7 @@ export class OrderwaterComponent {
   template: `
     <h2 mat-dialog-title>Order Water</h2>
     <form [formGroup]="orderForm" (ngSubmit)="submit()" class="p-4">
-      <mat-form-field appearance="fill" class="w-100 mb-3">
+      <!-- <mat-form-field appearance="fill" class="w-100 mb-3">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" required />
       </mat-form-field>
@@ -62,7 +62,7 @@ export class OrderwaterComponent {
       <mat-form-field appearance="fill" class="w-100 mb-3">
         <mat-label>Address</mat-label>
         <textarea matInput formControlName="address" required></textarea>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <mat-form-field appearance="fill" class="w-100 mb-3">
         <mat-label> Water 
@@ -84,12 +84,7 @@ export class OrderwaterComponent {
 
       <mat-form-field appearance="fill">
   <mat-label>Choose a date</mat-label>
-  <input
-    matInput
-    [matDatepicker]="picker"
-    [value]="formattedDate"
-    (dateChange)="onDateChange($event)" formControlName="delivery_date"
-  />
+  <input matInput [matDatepicker]="picker" [value]="formattedDate" (dateChange)="onDateChange($event)" formControlName="delivery_date"/>
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
@@ -120,8 +115,8 @@ export class WaterOrderDialog {
     public dialogRef: MatDialogRef<WaterOrderDialog>
   ) {
     this.orderForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
+      // name: ['', Validators.required],
+      // address: ['', Validators.required],
       can_type: ['', [Validators.required, Validators.min(1)]],
       quantity: ['', [Validators.required, Validators.min(1)]],
       delivery_date:['', Validators.required],

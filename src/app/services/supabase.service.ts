@@ -19,7 +19,7 @@ export class SupabaseService {
   }
 
 
-  signUp(userData: { email: string; password: string; name: string; phone: string; role: string }) {
+  signUp(userData: { email: string; password: string; name: string;address:string, phone: string; role: string }) {
     return this.supabase.auth.signUp({
       email: userData.email,
       password: userData.password,

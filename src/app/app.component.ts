@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SidetopbarComponent } from "./sidetopbar/sidetopbar.component";
+import { SignupComponent } from "./signup/signup.component";
+import { LoginComponent } from "./login/login.component";
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule,
@@ -21,6 +23,8 @@ import { SidetopbarComponent } from "./sidetopbar/sidetopbar.component";
 export class AppComponent {
   isSidetopbar: boolean | undefined;
   title = 'water';
+IsLoginPage:  boolean | undefined;
+IsSignupPage:  boolean | undefined;
    constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
@@ -28,6 +32,8 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         const url = event.url.split('?')[0]; // ✅ Ignore query params
         this.isSidetopbar = url === '/sidetopbar';
+        this.IsLoginPage = url === '/login';
+        this.IsSignupPage = url === '/signup';
       }
     });
   }

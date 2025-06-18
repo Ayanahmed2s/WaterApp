@@ -44,12 +44,13 @@ export class SignupComponent {
   constructor(private fb: FormBuilder, private supabaseService: SupabaseService,private router:Router) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
+      address:['', [Validators.required]],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       customer_type: ['', Validators.required],
       category: ['', Validators.required],
-      role: ['']
+    
     });
   }
 
@@ -59,7 +60,7 @@ export class SignupComponent {
       return;
     }
 
-    const { name, phone, email, password, customer_type, category } = this.signupForm.value;
+    const { name,address, phone, email, password, customer_type, category } = this.signupForm.value;
 
     const { data, error } = await this.supabaseService.signUp(this.signupForm.value);
 
@@ -78,6 +79,7 @@ export class SignupComponent {
 
     localStorage.setItem('pendingProfile', JSON.stringify({
       name,
+      address,
       phone,
       email,
       customer_type,

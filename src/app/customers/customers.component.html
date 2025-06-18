@@ -1,11 +1,17 @@
-<h2>Customers List</h2>
-
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
-
-  
-
+<h2>Customers</h2>
+<section class="container">
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <!-- Filter Part -->
+    <mat-form-field class="filter-input">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+      <!-- Scrollable Table Container -->
+ <div class="table-container mat-elevation-z8">
+    <div class="table-responsive">
+<table mat-table [dataSource]="dataSource" matSort>
   <!-- Name Column -->
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="name" sticky>
     <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let customer"> {{customer.name}} </td>
   </ng-container>
@@ -44,5 +50,94 @@
   <!-- Table Header and Row Declarations -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <!-- No Data Row -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>
+</section>
 
-</table>
+
+
+<!-- <section class="container">
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    Filter Part -->
+    <!-- <mat-form-field class="filter-input">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field> -->
+  <!-- Scrollable Table Container -->
+  <!-- <div class="table-container mat-elevation-z8">
+    <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" matSort class="w-100"> -->
+      <!-- Employee Image Column -->
+      <!-- <ng-container matColumnDef="employeeImage">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <img class="profile-img" src="{{element.employeeImage}}">
+        </td>
+      </ng-container> -->
+
+      <!-- Employee Name Column -->
+      <!-- <ng-container matColumnDef="employeeName">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+      </ng-container> -->
+
+      <!-- Leave Type Column -->
+      <!-- <ng-container matColumnDef="employeeLeaveType">
+        <th mat-header-cell *matHeaderCellDef> Leave Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeLeaveType}} </td>
+      </ng-container> -->
+
+      <!-- Start Date Column -->
+      <!-- <ng-container matColumnDef="employeeLeaveStart">
+        <th mat-header-cell *matHeaderCellDef> Start </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeLeaveStart}} </td>
+      </ng-container> -->
+
+      <!-- End Date Column -->
+      <!-- <ng-container matColumnDef="employeeLeaveEnd">
+        <th mat-header-cell *matHeaderCellDef> End </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeLeaveEnd}} </td>
+      </ng-container> -->
+
+      <!-- No. of Days Column -->
+      <!-- <ng-container matColumnDef="employeeLeaveDays">
+        <th mat-header-cell *matHeaderCellDef> No. of Days </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeLeaveDays}} Days </td>
+      </ng-container> -->
+
+      <!-- <ng-container matColumnDef="employeeEmail">
+        <th mat-header-cell *matHeaderCellDef>EmailID</th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeEmail}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="emplyeeStatus">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element"> {{element.emplyeeStatus}} </td>
+      </ng-container> -->
+      <!-- Action Column -->
+      <!-- <ng-container matColumnDef="employeeLinks">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element" class="contact">
+          <mat-icon (click)="getLeaveData(element)">edit_square</mat-icon>
+          <mat-icon>maps_ugc</mat-icon>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+      <!-- No Data Row -->
+      <!-- <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>
+</section> -->

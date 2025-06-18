@@ -1,4 +1,4 @@
-.jcc {
+/* .jcc {
     justify-content: center;
 }
 
@@ -41,7 +41,7 @@
   
   .left .logo {
     /* margin */
-    width: 150px;
+    /* width: 150px;
   }
   
 
@@ -117,4 +117,4 @@
   }
   .mdc-text-field--filled:not(.mdc-text-field--disabled){
     background-color: white ;
-}
+} */

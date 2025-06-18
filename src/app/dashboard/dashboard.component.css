@@ -96,6 +96,7 @@
       color: white;
       list-style: none;
     }
+    /* phone view features  */
     @media (max-width: 590px) {
       .ownerphoto{
         margin-left: 50px;
