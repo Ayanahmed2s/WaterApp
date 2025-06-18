@@ -1,0 +1,102 @@
+<!-- <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+  <input type="text" name="name" [(ngModel)]="form.name" placeholder="Full Name" required />
+  <input type="tel" name="phone" [(ngModel)]="form.phone" placeholder="Phone" required />
+  <input name="customer_type" [(ngModel)]="form.customer_type" placeholder="Permanent" required />
+  <input  name="category" [(ngModel)]="form.category" placeholder="Residential" required />
+
+  <input type="email" name="email" [(ngModel)]="form.email" placeholder="Email" required />
+  <input type="password" name="password" [(ngModel)]="form.password" placeholder="Password" required />
+
+  <select name="role" [(ngModel)]="form.role" required>
+    <option value="" disabled selected>Select role</option>
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+  </select>
+  <button type="submit" (click)="onSubmit()">Sign Up</button>
+</form> -->
+
+ <div class="container">
+    <!-- Left Side -->
+    <div class="left" style="margin-right: 200px;">
+      <img src="http://localhost:4200/assets/images/logo/image copy.png" class="company-img" style="width: 50%; padding-top: 100px;" alt=""  >
+      <img src="/assets/images/companylogos/signup.png" class="company-img" style="width: 110%;" alt="">
+    </div>
+  
+    <!-- Right Side -->
+    <mat-card style="align-items: center;color: #35a849;border: 3px solid #935a0e;">
+      <p class="fs-2 fw-5" style="color: #35a849;"> Welcome to StaffLinkHR </p>
+      <p class="fs-6 ac" style="color: #935a0e;"> Already Have a Account ?
+        <a class="link-offset-2 link-underline link-underline-opacity-0" href="login">Log in</a>
+    </p>
+    
+  <h2>Sign Up</h2>
+<form [formGroup]="signupForm" class="ps-2" (ngSubmit)="onSubmit()">
+
+  <!-- Name -->
+  <div class="ps-5 name-fields">
+    <mat-form-field appearance="outline"  style="width: 87%;" class="example-full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" placeholder="Full Name" formControlName="name" required />
+    </mat-form-field>
+  </div>
+
+  <!-- Phone -->
+  <div class="ps-5 name-fields">
+    <mat-form-field appearance="outline" style="width: 45%;">
+      <mat-label>Telephone</mat-label>
+      <span matTextPrefix>+91 &nbsp;</span>
+      <input matInput type="tel" placeholder="Phone" formControlName="phone" required />
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+      <!-- Customer Type -->
+  <mat-form-field class="ps-2" style="width: 40%;" appearance="outline">
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="customer_type" placeholder="Select Type">
+      <mat-option *ngFor="let type of types" [value]="type.value">
+        {{ type.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+
+  <!-- Email -->
+  <mat-form-field appearance="outline" class="ps-5" style="width: 87%;">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" placeholder="Email" formControlName="email" required />
+    <mat-error *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+      Enter a valid email (e.g., examplegmail.com)
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Password -->
+  <mat-form-field class="mt-1 ps-5" style="width: 87%;" appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" required />
+    <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+      Password must be strong and include special characters like %, *, !
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Category -->
+  <mat-form-field class="ps-5" style="width: 87%;" appearance="outline">
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category" placeholder="Select Category">
+      <mat-option *ngFor="let cat of Category" [value]="cat.value">
+        {{ cat.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <button class="mb-3 me-3" mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">
+      Submit
+    </button>
+    <button class="mb-3 me-5" mat-button color="warn" type="button" (click)="signupForm.reset()">
+      Cancel
+    </button>
+  </div>
+</form>

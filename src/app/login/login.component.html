@@ -1,0 +1,49 @@
+  
+   <div class="container">
+    <!-- Left Side -->
+    <div class="left" style="margin-right: 200px;">
+      <img src="http://localhost:4200/assets/images/logo/image copy.png" class="company-img" style="width: 50%; padding-top: 100px;" alt=""  >
+      <img src="/assets/images/companylogos/signup.png" class="company-img" style="width: 110%;" alt="">
+    </div>
+  
+    <!-- Right Side -->
+    <mat-card style="align-items: center;color: #35a849;border: 3px solid #935a0e;">
+      <p class="fs-2 fw-5" style="color: #35a849;"> Welcome to StaffLinkHR </p>
+      <p class="fs-6 ac" style="color: #935a0e;"> Already Have a Account ?
+        <a class="link-offset-2 link-underline link-underline-opacity-0" href="login">Log in</a>
+    </p>
+    
+  <h2>Sign Up</h2>
+<form [formGroup]="loginform" class="ps-2" (ngSubmit)="onSubmit()">
+
+  <!-- Email -->
+  <mat-form-field appearance="outline" class="ps-5" style="width: 87%;">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" placeholder="Email" formControlName="email" required />
+    <mat-error *ngIf="loginform.get('email')?.invalid && loginform.get('email')?.touched">
+      Enter a valid email (e.g., examplegmail.com)
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Password -->
+  <mat-form-field class="mt-1 ps-5" style="width: 87%;" appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" required />
+    <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="loginform.get('password')?.invalid && loginform.get('password')?.touched">
+      Password must be strong and include special characters like %, *, !
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <button class="mb-3 me-3" mat-raised-button color="primary" type="submit" [disabled]="loginform.invalid">
+      Submit
+    </button>
+    <button class="mb-3 me-5" mat-button color="warn" type="button" (click)="loginform.reset()">
+      Cancel
+    </button>
+  </div>
+</form>
