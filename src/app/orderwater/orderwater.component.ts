@@ -19,6 +19,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { SupabaseService } from '../services/supabase.service';
+import { error } from 'console';
 
 
 @Component({
@@ -149,7 +150,7 @@ const profile_id = user?.id;
       } = await this.supabaseService.updateDeliveryData(combinedData);
 
       if (updateError) {
-        console.error('Delivery update failed:', updateError.message);
+        console.error('Delivery update failed:', error);
       } else {
         console.log('Delivery data saved:', data);
         // ✅ Optional: clean up pending profile
