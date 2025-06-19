@@ -19,7 +19,6 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { SupabaseService } from '../services/supabase.service';
-import { error } from 'console';
 
 
 @Component({
@@ -48,10 +47,7 @@ export class OrderwaterComponent {
 // Dialog Component — No external .html file needed
 @Component({
   selector: 'water-order-dialog',
-  imports:[MatButtonModule,MatIconModule,MatCardModule,MatDialogTitle,MatNativeDateModule,MatDatepickerModule,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,FormsModule,RouterModule,MatSelectModule,MatInputModule,ReactiveFormsModule],
+  imports:[MatButtonModule,MatIconModule,MatCardModule,MatDialogTitle,MatNativeDateModule,MatDatepickerModule,FormsModule,RouterModule,MatSelectModule,MatInputModule,ReactiveFormsModule],
   template: `
     <h2 mat-dialog-title>Order Water</h2>
     <form [formGroup]="orderForm" (ngSubmit)="submit()" class="p-4">
@@ -150,7 +146,7 @@ const profile_id = user?.id;
       } = await this.supabaseService.updateDeliveryData(combinedData);
 
       if (updateError) {
-        console.error('Delivery update failed:', error);
+        console.error('Delivery update failed:', updateError.message);
       } else {
         console.log('Delivery data saved:', data);
         // ✅ Optional: clean up pending profile

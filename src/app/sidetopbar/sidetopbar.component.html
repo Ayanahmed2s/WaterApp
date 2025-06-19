@@ -32,7 +32,7 @@
     <header class="topbar" style="flex-shrink: 0; background: #e0f7fa; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
       <button class="toggle-btn" style="color: brown; border: 2px sandybrown;" (click)="togglesidebar()">☰</button>
       <h3>Welcome, {{ userRole | titlecase }}</h3>
-      <button class="logout float-end">Logout</button>
+      <button class="logout float-end" (click)="logout()">Logout</button>
     </header>
 
     <!-- Content Area (Scrolls) -->
