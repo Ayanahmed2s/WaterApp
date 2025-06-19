@@ -1,48 +1,42 @@
-import { Component,OnInit,Inject,PLATFORM_ID} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import {MatIconModule} from '@angular/material/icon';
-import { Router ,NavigationEnd } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import bootstrap from '../../main.server';
+import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { SupabaseService } from '../services/supabase.service';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
+
 @Component({
   selector: 'app-sidetopbar',
-  imports: [MatIconModule, RouterModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './sidetopbar.component.html',
   styleUrl: './sidetopbar.component.css'
 })
-export class SidetopbarComponent {
-  userRole: 'admin' | undefined ;
-    isBrowser: boolean = false;
- isCollapsed:boolean = false;
- constructor(private supabase:SupabaseService,private router:Router,@Inject(PLATFORM_ID) private platformId: Object
+export class SidetopbarComponent implements OnInit {
+  isBrowser = false;
+  isCollapsed = false;
+  userName: string | null = null;
+  userRole: 'admin' | undefined;
+
+  constructor(
+    private supabase: SupabaseService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
- togglesidebar(){
-  this.isCollapsed=!this.isCollapsed;
- }
-sidebarState: any;
 
-  logout() {
-this.supabase.logout().then(() => {
-  this.router.navigate(['/login']); // Redirect to login after logout
-});
-}
-  
-  // constrouctor (private cookieService:CookieService,private router:Router){}
-  // ngOnInit() {
-  //   if (typeof window !== 'undefined') {
-  //     this.userRole = localStorage.getItem('userRole');
-  //   } 
-  //   if (this.savedState) {
-  //     this.sidebarState = JSON.parse(this.savedState);
-  //   }
-    
-  //  }
- 
- 
+  ngOnInit(): void {
+    if (!this.isBrowser) return;
+    this.userName = localStorage.getItem('name');
+  }
+
+  togglesidebar(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  logout(): void {
+    this.supabase.logout().then(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 }
