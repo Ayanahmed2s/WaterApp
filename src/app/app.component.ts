@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule, ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,19 +21,24 @@ import { LoginComponent } from "./login/login.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  isSidetopbar: boolean | undefined;
   title = 'water';
-IsLoginPage:  boolean | undefined;
-IsSignupPage:  boolean | undefined;
-   constructor(private route: ActivatedRoute, private router: Router) {}
+  isLoginOrSignup = false;
+  isBrowser = false;
+
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit() {
+    if (!this.isBrowser) return;
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const url = event.url.split('?')[0]; // ✅ Ignore query params
-        this.isSidetopbar = url === '/sidetopbar';
-        this.IsLoginPage = url === '/login';
-        this.IsSignupPage = url === '/signup';
+        const url = event.url.split('?')[0];
+        this.isLoginOrSignup = ['/login', '/signup'].includes(url);
       }
     });
   }

@@ -1,4 +1,11 @@
-<router-outlet *ngIf="IsSignupPage || IsLoginPage"></router-outlet>
- <div *ngIf="!IsSignupPage && !IsLoginPage" >
-<app-sidetopbar><router-outlet ></router-outlet>
-</app-sidetopbar></div>
+<!-- Show Login/Signup pages -->
+<router-outlet *ngIf="isLoginOrSignup"></router-outlet>
+
+<!-- Show everything else with sidetopbar -->
+<div *ngIf="!isLoginOrSignup">
+  <app-sidetopbar>
+    <router-outlet></router-outlet>
+  </app-sidetopbar>
+</div>
+
+

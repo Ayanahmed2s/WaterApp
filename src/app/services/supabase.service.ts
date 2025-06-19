@@ -4,7 +4,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { isPlatformBrowser } from '@angular/common';
 
 const SUPABASE_URL = 'https://cgcqznprpsllntkvhkpl.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // replace with your real key
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnY3F6bnBycHNsbG50a3Zoa3BsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTA5NTQsImV4cCI6MjA2MzQ2Njk1NH0.wIDShDa1oo6ydtIC3MQdI7uyHbx-Zgi258-0KGEsBOw'; // replace with your real key
 
 @Injectable({ providedIn: 'root' })
 export class SupabaseService {

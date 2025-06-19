@@ -62,10 +62,10 @@ loginform: FormGroup;
       console.error('Profile update failed:', updateError.message);
     } else {
       console.log('Profile updated.');
-      // localStorage.removeItem('pendingProfile'); // ✅ cleanup
+      
     }
   }
-  this.router.navigate(['/login']);
+  this.router.navigate(['/dashboard']);
   // ✅ Redirect to dashboard
  alert('login successfull')
 }
