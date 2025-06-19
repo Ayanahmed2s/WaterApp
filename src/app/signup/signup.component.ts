@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { SupabaseService } from '../services/supabase.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { async } from 'rxjs';
 
  interface categories {
   value: string;
@@ -40,8 +41,11 @@ export class SignupComponent {
     { value: 'Permanent', viewValue: 'Permanent' },
     { value: 'Temporary', viewValue: 'Temporary' },
   ];
+  isBrowser: boolean=false;
 
-  constructor(private fb: FormBuilder, private supabaseService: SupabaseService,private router:Router) {
+  constructor(private fb: FormBuilder, private supabaseService: SupabaseService,private router:Router, @Inject(PLATFORM_ID) private platformId: Object
+  ){
+        this.isBrowser = isPlatformBrowser(this.platformId);
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       address:['', [Validators.required]],

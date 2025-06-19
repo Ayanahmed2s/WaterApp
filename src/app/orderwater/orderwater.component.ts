@@ -1,7 +1,8 @@
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Component, inject, Inject } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,7 +29,11 @@ import { SupabaseService } from '../services/supabase.service';
   styleUrl: './orderwater.component.css'
 })
 export class OrderwaterComponent {
-  constructor(private dialog: MatDialog) {}
+  isBrowser: boolean = false;
+  constructor(private dialog: MatDialog, @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(WaterOrderDialog, {
@@ -99,6 +104,7 @@ export class OrderwaterComponent {
 export class WaterOrderDialog {
   orderForm: FormGroup;
     formattedDate: string = '';
+  isBrowser: boolean=false;
 
   onDateChange(event: any) {
     const date = event.value;
@@ -109,11 +115,11 @@ export class WaterOrderDialog {
     constructor(
     private fb: FormBuilder,
     private supabaseService : SupabaseService,
-    public dialogRef: MatDialogRef<WaterOrderDialog>
+    public dialogRef: MatDialogRef<WaterOrderDialog>,@Inject(PLATFORM_ID) private platformId: Object
+
   ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.orderForm = this.fb.group({
-      // name: ['', Validators.required],
-      // address: ['', Validators.required],
       can_type: ['', [Validators.required, Validators.min(1)]],
       quantity: ['', [Validators.required, Validators.min(1)]],
       delivery_date:['', Validators.required],
@@ -124,7 +130,7 @@ export class WaterOrderDialog {
 
  async submit() {
   if (!this.orderForm.valid) return;
-  
+      if (!this.isBrowser) return;
   const orderValues = this.orderForm.value;
 const user = await this.supabaseService.getUser();
 const profile_id = user?.id;

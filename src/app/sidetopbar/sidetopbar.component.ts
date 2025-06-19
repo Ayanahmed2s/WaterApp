@@ -1,4 +1,5 @@
-import { Component,OnInit} from '@angular/core';
+import { Component,OnInit,Inject,PLATFORM_ID} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { Router ,NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -15,8 +16,12 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 })
 export class SidetopbarComponent {
   userRole: 'admin' | undefined ;
+    isBrowser: boolean = false;
  isCollapsed:boolean = false;
- constructor(private supabase:SupabaseService,private router:Router){}
+ constructor(private supabase:SupabaseService,private router:Router,@Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
  togglesidebar(){
   this.isCollapsed=!this.isCollapsed;
  }

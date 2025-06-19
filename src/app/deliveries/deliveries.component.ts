@@ -1,5 +1,5 @@
-import {AfterViewInit, Component,ViewChild} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {AfterViewInit, Component,Inject,PLATFORM_ID,ViewChild} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -42,10 +42,11 @@ export class DeliveriesComponent {
   @ViewChild(MatSort)
   sort!: MatSort;
   router = new Router;
+  isBrowser: boolean;
 
-  constructor( private supabase:SupabaseService ) {
-    // Assign the data to the data source for the table to render
-    // this.dataSource = new MatTableDataSource(allCompanies);
+  constructor( private supabase:SupabaseService, @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
   ngOnInit(): void {
     this.loaddeliveries()
@@ -63,6 +64,7 @@ export class DeliveriesComponent {
   // }
 
   async loaddeliveries() {
+    if (!this.isBrowser) return;
     const customers = await this.supabase.getDeliveriesData();
     this.dataSource.data = customers;  // ✅ Now the table gets real data
   }

@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,10 +27,11 @@ export class MyordersComponent {
   @ViewChild(MatSort)
   sort!: MatSort;
   router = new Router;
+  isBrowser: boolean=false;
 
-  constructor( private supabase:SupabaseService ) {
-    // Assign the data to the data source for the table to render
-    // this.dataSource = new MatTableDataSource(allCompanies);
+  constructor( private supabase:SupabaseService,@Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
   ngOnInit(): void {
     this.loaddeliveries()
@@ -41,13 +42,9 @@ export class MyordersComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  // getCompanyData(company: any) {
-  //     const editCompany  = this.dataSource.filteredData.find(list => list.companyId === company.companyId);
-  //     this.router.navigate(['/editcompany'], { queryParams: { companyId: company.companyId } });
-  //     console.log(editCompany);
-  // }
-
+ 
   async loaddeliveries() {
+        if (!this.isBrowser) return;
     const customers = await this.supabase.getDeliveriesData();
     this.dataSource.data = customers;  // ✅ Now the table gets real data
   }
