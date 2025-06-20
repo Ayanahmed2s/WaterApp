@@ -1,8 +1,7 @@
 {
+  "outputDirectory": "dist/water",
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
+

@@ -15,7 +15,7 @@
           "options": {
   "outputPath": "dist/water",
   "index": "src/index.html",
-              "baseHref": "/WaterApp/",
+              "baseHref": "/",
 
   "browser": "src/main.ts",
   "polyfills": [
