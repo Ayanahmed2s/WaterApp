@@ -12,9 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './membership.component.css',
 })
 export class MembershipComponent {
-  isBrowser = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 }

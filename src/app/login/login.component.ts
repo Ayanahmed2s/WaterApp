@@ -54,7 +54,6 @@ export class LoginComponent {
   }
 
   async onSubmit() {
-    if (!this.isBrowser) return;
 
     if (this.loginform.invalid) {
       this.loginform.markAllAsTouched();
