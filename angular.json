@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-  "outputPath": "dist/water",
+  "outputPath": "dist",
   "index": "src/index.html",
               "baseHref": "/",
 
