@@ -1,15 +1,17 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-// import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { routes } from './app.routes';
-//provideAnimationsAsync(),
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    
-    provideRouter(routes),
+
+    // ✅ Add blocking initial navigation for SSR safety and clean fallback handling
+    provideRouter(routes, withEnabledBlockingInitialNavigation()),
+
     provideClientHydration(withEventReplay())
   ]
 };
+
 
