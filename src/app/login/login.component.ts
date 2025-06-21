@@ -91,7 +91,6 @@ export class LoginComponent {
           console.error('Profile update failed:', updateError.message);
         } else {
           console.log('Profile updated.');
-          localStorage.removeItem('pendingProfile');
         }
       }
 

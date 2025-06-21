@@ -79,7 +79,16 @@ export class SignupComponent {
     }
 
     const formValue = this.signupForm.value;
-
+   // Store remaining data in localStorage safely (in browser)
+      localStorage.setItem('pendingProfile',JSON.stringify({
+          name: formValue.name,
+          address: formValue.address,
+          phone: formValue.phone,
+          email: formValue.email,
+          customer_type: formValue.customer_type,
+          category: formValue.category,
+        })
+      );
     try {
       const { data, error } = await this.supabaseService.signUp(formValue);
 
@@ -95,16 +104,7 @@ export class SignupComponent {
         return;
       }
 
-      // Store remaining data in localStorage safely (in browser)
-      localStorage.setItem('pendingProfile',JSON.stringify({
-          name: formValue.name,
-          address: formValue.address,
-          phone: formValue.phone,
-          email: formValue.email,
-          customer_type: formValue.customer_type,
-          category: formValue.category,
-        })
-      );
+      
 
       this.router.navigate(['/login']);
       alert('Signup successful! Check your email for verification.');
