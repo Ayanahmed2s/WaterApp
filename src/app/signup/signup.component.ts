@@ -96,9 +96,7 @@ export class SignupComponent {
       }
 
       // Store remaining data in localStorage safely (in browser)
-      localStorage.setItem(
-        'pendingProfile',
-        JSON.stringify({
+      localStorage.setItem('pendingProfile',JSON.stringify({
           name: formValue.name,
           address: formValue.address,
           phone: formValue.phone,

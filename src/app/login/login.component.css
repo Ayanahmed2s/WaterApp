@@ -1,0 +1,10 @@
+.signlogimage{
+  width: 50%;
+  align-self: center;
+  padding: 50px;
+}
+@media (max-width: 768px) {
+  .signlogimage{
+    width: 100%;
+  }
+}
